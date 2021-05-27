@@ -1,0 +1,171 @@
+﻿@using Microsoft.AspNetCore.Http
+
+
+@*<div class="agileits_header">
+        <div class="w3l_offers">
+            <a href="/Home/Index">AnaSayfa AA</a>
+        </div>
+        <div class="w3l_search">
+        </div>
+        <div class="product_list_header">
+            <form action="/Product/SepetBuy" method="post" class="last">
+                <fieldset>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Context.Session.GetString("username")
+                    }
+                    <input type="hidden" name="cmd" value="_cart"/>
+                    <input type="hidden" name="display" value="1"/>
+                    <a href="/Home/Index">Herkes Home </a>
+                    <a href="/Sepet/Index?userId=@User.Identity.Name">Sepet</a>
+                    <a href="/Home/GirisSayfa">Login</a>
+                    <a href="/Product/AdminAnasayfa">AdminAnasayfa</a>
+                    <a href="/Home/Logout">Çıkış</a>
+                </fieldset>
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DenemeShop_MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    @*<link href="~/font/fontawesome-free-5.15.3-web/css/fontawesome.css" rel="stylesheet" />*@
+    <link href="~/font/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet" />
+    @*<script src="~/font/fontawesome-free-5.15.3-web/js/fontawesome.js"></script>*@
+    <style>
+        footer {
+            text-align: center;
+            padding: 3px;
+            background-color: #84C639;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/Home/Index">AA STORE</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    &nbsp;
+                    &nbsp;
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Context.Session.GetString("username")
+                        @*@Context.Session.GetInt32("Id")*@
+                    }
+                    &nbsp;
+                    &nbsp;
+                    @*<input type="hidden" name="cmd" value="_cart"/>
+        <input type="hidden" name="display" value="1"/>*@
+                    <a href="/Home/Index" class="btn btn-info" style="background-color:orangered"><i class="fas fa-home"></i> Anasayfa</a>
+                    &nbsp;
+                    &nbsp;
+                    <a href="/Sepet/Index?userId=@User.Identity.Name" class="btn btn-info" style="background-color:orangered"><i class="fas fa-shopping-cart"></i> Sepetim</a>
+                    &nbsp;
+                    &nbsp;
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Home/GirisSayfa" class="btn btn-info" style="background-color:#84C639"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    }
+                    &nbsp;
+                    @if (@Context.Session.GetString("username") == "admin")
+                    {
+                        <a href="/Product/AdminAnasayfa" class="btn btn-info" style="background-color:orangered"><i class="fas fa-house-user"></i>AdminAnasayfa</a>
+                        @*@Context.Session.GetString("username")*@
+                    }
+                    &nbsp;
+                    &nbsp;
+                    @*<a href="/Product/AdminAnasayfa">AdminAnasayfa</a>*@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Home/Logout" class="btn btn-danger" style="background-color:#84C639"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+                        @*@Context.Session.GetString("username")*@
+                    }
+                    &nbsp;
+                    &nbsp;
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="background-color: #84C639; color: white; margin-right:auto;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Üyelil Bilgileri
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Account/AccountSetting">Hesap Ayarları</a>
+                            <a class="dropdown-item" href="/Account/ChangePassword">Şifre Güncelle</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!--<footer>
+    <div class="logo_products" >
+        <div class="container">
+            <div class="w3ls_logo_products_left">
+                <h1><a href="/Home/Index"><span>Ajans</span> Store</a></h1>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="special_items">
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <p>E-Ticaret Projesi 2021</p>
+    <p><a href="https://www.aa.com.tr/tr">Anadolu Ajansı</a></p>-->
+    @*<a href="https://www.aa.com.tr/tr" ></a>*@
+    <!--</footer>-->
+
+    <footer style="height: 120px;position: absolute;bottom: 0;width: 100%">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h4 class="text-center">İletişim</h4>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="https://www.aa.com.tr/tr" style="font-size: 15px">Anadolu Ajansı</a>
+                        </li>
+                    </ul>
+                    <h4 class="text-center">Sosyal Medya</h4>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="https://www.facebook.com/anadoluajansi/" style="font-size: 35px"><i class="fab fa-facebook"></i></a>
+                            <a href="https://twitter.com/anadoluajansi" style="font-size: 35px"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.youtube.com/channel/UCVbZYhcirOke2vipxs4lT2w" style="font-size: 35px"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/anadoluajansi/" style="font-size: 35px"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

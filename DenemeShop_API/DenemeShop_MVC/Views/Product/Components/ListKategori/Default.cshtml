@@ -1,0 +1,11 @@
+﻿@model Task<List<DenemeShop_MVC.Models.Kategori>>
+@*kategoriler burda*@
+<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        @foreach (var item in Model.Result)
+        {
+            <li><a href="/Home/KategoriDetay/@item.KategoriID" id="KalemHref"><i class="fas fa-chevron-right"></i>@item.KategoriName</a></li>
+
+        }
+    </ul>
+</div>

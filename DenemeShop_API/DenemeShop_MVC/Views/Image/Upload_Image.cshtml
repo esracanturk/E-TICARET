@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+@*<body>
+<form asp-controller="Image" asp-action="Upload_Image" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <button type="submit">Upload Image</button>
+
+</form>
+<label>Upload File=@ViewData["FilePath"]</label>
+</body>*@
+
+
+<form asp-controller="Image" asp-action="Upload_Image" method="post" enctype="multipart/form-data">
+    <div class="custom-file">
+        <input class="form-control custom-file-input" type="file" name="file" />
+        <label class="custom-file-label">Seçiniz</label>
+    </div>
+    <button type="submit">Yükle</button>
+</form>
+<img src="@ViewData["FileLocation"]" width="200" height="200"/>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".custom-file-input").on("change",
+            function() {
+                var fileName = $(this).split("\\").pop();
+                $(this).next(".custom-file-label").html(fileName);
+            });
+    });
+</script>

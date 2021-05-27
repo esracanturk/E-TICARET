@@ -1,0 +1,138 @@
+﻿@model DenemeShop_MVC.Models.ProductWithStore
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src='js/okzoom.js'></script>
+    <script>
+        $(function () {
+            $('#example').okzoom({
+                width: 150,
+                height: 150,
+                border: "1px solid black",
+                shadow: "0 0 5px #000"
+            });
+        });
+    </script>
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+            var navoffeset = $(".agileits_header").offset().top;
+            $(window).scroll(function () {
+                var scrollpos = $(window).scrollTop();
+                if (scrollpos >= navoffeset) {
+                    $(".agileits_header").addClass("fixed");
+                } else {
+                    $(".agileits_header").removeClass("fixed");
+                }
+            });
+
+        });
+    </script>
+    <div class="logo_products">
+        <div class="container">
+            <div class="w3ls_logo_products_left">
+                <h1><a href="/Home/Index"><span>Ajans</span> Store</a></h1>
+            </div>
+            <div class="w3ls_logo_products_left1">
+                <ul class="special_items">
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+    <div class="w3l_banner_nav_left">
+        @await Component.InvokeAsync("ListKategori")
+        @*</nav>*@
+    </div>
+    <div class="col-md-4 agileinfo_single_left">
+        <img id="example" style="height: 300px;" src="@Model.ImageUrl" alt="@Model.ImageUrl" class="img-responsive"  />
+    </div>
+    @*<div class="col-md-8 agileinfo_single_right">*@
+    <div class="rating1">
+        <span class="starRating">
+            <input id="rating5" type="radio" name="rating" value="5">
+            <label for="rating5">5</label>
+            <input id="rating4" type="radio" name="rating" value="4">
+            <label for="rating4">4</label>
+            <input id="rating3" type="radio" name="rating" value="3" checked>
+            <label for="rating3">3</label>
+            <input id="rating2" type="radio" name="rating" value="2">
+            <label for="rating2">2</label>
+            <input id="rating1" type="radio" name="rating" value="1">
+            <label for="rating1">1</label>
+        </span>
+        <br />
+    </div>
+    @*<input type="submit" name="submit" id="B1" value="Sepete Ekle" class="button" />*@
+    <div>
+        <p><h4>Ürün Adı:<i class="" style="color: orangered"> @Model.Name </i></h4></p><br />
+        <p><h4>Ürün Miktarı:<i class="item_quantity" style="color: orangered">@Model.Quantity adet</i></h4></p><br />
+        <p><h4>Ürün Fİyatı:<i class="item_price" style="color: orangered">@Model.Price ₺</i></h4></p><br />
+        @*<p><h4>Ürün Fotoğrafı:<i class="item_imageurl" style="color: orangered">@Model.ImageUrl</i></h4></p><br />*@
+        <p><h4>Ürün Açıklaması:<i class="item_description" style="color: orangered">@Model.Description</i></h4></p><br />
+        <p><h4>Ürün Mağaza Bilgisi:<i class="item_description" style="color: orangered">@Model.groupName</i></h4></p><br />
+        <button class="btn btn-info" id="Satinbuttonn" style="background-color: #84C639"><i class="fas fa-cart-plus"></i> Sepete Ekle</button>
+    </div>
+    <div class="clearfix"> </div>
+    <div class="clearfix"></div>
+
+    <script>
+            $(document).ready(function () {
+                debugger;
+            //$("#dropdown").select2();
+            $("#Satinbuttonn").click(function () {
+                debugger;
+                $.ajax({
+                            type: 'POST',
+                            url: '/Product/SepetBuy',
+                            data: {
+                                Id: @Model.Id,
+                                Name: '@Model.Name',
+                                Quantity: @Model.Quantity,
+                                Price: @Model.Price,
+                                ImageUrl: '@Model.ImageUrl',
+                                Description: '@Model.Description',
+                                groupId: @Model.groupId,
+                                groupName: '@Model.groupName'
+                            },
+                            /*data: '{groupid:' + dropvalue + ' }',*/
+                            success: function(data) {
+                                debugger
+                                console.log('olduuuu')
+                                window.location.href = '@Url.Action("Index","Sepet")';
+                            },
+                            error: function(data) {
+                                debugger
+
+                            }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

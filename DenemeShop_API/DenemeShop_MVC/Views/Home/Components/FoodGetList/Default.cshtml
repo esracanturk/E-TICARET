@@ -1,0 +1,51 @@
+﻿@model Task<List<DenemeShop_MVC.Models.ProductWithStore>>
+@*@model IEnumerable<List<ShopYeni.MVC.Models.GelenData>>*@
+
+@*@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<DenemeShop_MVC.Models.ProductWithStore>*@
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<h3>Ürünler</h3>
+@*@await Component.InvokeAsync("FoodGetList")*@
+
+<div class="agile_top_brands_grids">
+
+    @foreach (var item in Model.Result)
+    {
+        <div class="col-md-3 top_brand_left" style="margin-bottom:50px;">
+            <div class="hover14 column">
+                <div class="agile_top_brand_left_grid">
+                    <div class="agile_top_brand_left_grid_pos">
+                        <img src="/web/images/offer.png" alt=" " class="img-responsive" />
+                    </div>
+                    <div class="agile_top_brand_left_grid1">
+                        <figure>
+                            <div class="snipcart-item block">
+                                <div class="snipcart-thumb">
+                                    @* <a href="/Product/Detay?i=@item.Id"><img style="width: 250px; height: 200px;" src="~/img/kirtasiye/defter1.jpg" alt="" class="img-responsive" asp-append-version="true" /></a>*@
+                                    <div>
+                                        <img id="img1" runat="server" src="@item.ImageUrl" alt="@item.ImageUrl" style="width: 150px; height: 100px;" />
+                                    </div>
+                                    <a href="/Product/Detay?i=@item.Id"> @item.Name</a>
+                                    <a href="/Product/Detay?i=@item.Id"> @item.groupName</a>
+                                    @*<a href="/Product/Detay?i=@item.Id"> @item.ImageUrl</a>*@
+                                    <p></p>
+                                    <h4>Fiyat: @item.Price ₺ @*<span>(@item.Price)₺</span>*@</h4> <h6>Miktar:@item.Quantity</h6>
+
+                                </div>
+                                <div class="snipcart-details top_brand_home_details">
+                                    <form action="DetaySepetBuy?i=@item.Id" method="post">
+                                        <fieldset>
+                                            <input type="button" class="button" value="Sepete Ekle" onclick="location.href='@Url.Action("DetaySepetBuy", "Product",new{i=@item.Id})'" />
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

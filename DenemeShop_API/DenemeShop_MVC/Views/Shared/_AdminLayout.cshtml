@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNetCore.Http
+
+
+@*<div class="agileits_header">
+        <div class="w3l_offers">
+            <a href="/Home/Index">AnaSayfa AA</a>
+        </div>
+        <div class="w3l_search">
+        </div>
+        <div class="product_list_header">
+            <form action="/Product/SepetBuy" method="post" class="last">
+                <fieldset>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Context.Session.GetString("username")
+                    }
+                    <input type="hidden" name="cmd" value="_cart"/>
+                    <input type="hidden" name="display" value="1"/>
+                    <a href="/Home/Index">Herkes Home </a>
+                    <a href="/Sepet/Index?userId=@User.Identity.Name">Sepet</a>
+                    <a href="/Home/GirisSayfa">Login</a>
+                    <a href="/Product/AdminAnasayfa">AdminAnasayfa</a>
+                    <a href="/Home/Logout">Çıkış</a>
+                </fieldset>
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DenemeShop_MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/font/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AA Store</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <form action="/Product/SepetBuy" method="post" class="last">
+                    <fieldset>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Context.Session.GetString("username")
+                        }
+                        @*<input type="hidden" name="cmd" value="_cart"/>
+                            <input type="hidden" name="display" value="1"/>*@
+                        <a href="/Home/Index" class="btn btn-info" style="background-color:orangered"><i class="fas fa-home"></i> Anasayfa</a>
+                        <a href="/Sepet/Index?userId=@User.Identity.Name" class="btn btn-info" style="background-color:orangered"><i class="fas fa-shopping-cart"></i> Sepetim</a>
+
+                        @if (@Context.Session.GetString("username")=="admin")
+                        {
+                            <a href="/Product/AdminAnasayfa" class="btn btn-info"style="background-color:orangered"><i class="fas fa-house-user"></i> AdminAnasayfa</a>
+                            @*@Context.Session.GetString("username")*@
+                        }
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Home/GirisSayfa" class="btn btn-info" style="background-color:#84C639"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        }
+                        @*<a href="/Product/AdminAnasayfa">AdminAnasayfa</a>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Home/Logout" class="btn btn-info"style="background-color:#84C639"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+                            @*@Context.Session.GetString("username")*@
+                        }
+
+
+                    </fieldset>
+                </form>
+                @*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>*@
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        @*<div class="container">
+                &copy; 2021 - DenemeShop_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>*@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

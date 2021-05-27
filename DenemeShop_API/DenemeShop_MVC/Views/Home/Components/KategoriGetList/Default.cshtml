@@ -1,0 +1,62 @@
+﻿@*@model Task<List<DenemeShop_MVC.Models.ProductWithKategori>>*@
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<DenemeShop_MVC.Models.ProductWithKategori>
+ 
+<h3>Ürünler</h3>
+<div class="agile_top_brands_grids">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 top_brand_left" style="margin-bottom:50px;">
+            <div class="hover14 column">
+                <div class="agile_top_brand_left_grid">
+                    <div class="agile_top_brand_left_grid_pos">
+                        <img src="/web/images/offer.png" alt=" " class="img-responsive" />
+                    </div>
+                    <div class="agile_top_brand_left_grid1">
+                        <figure>
+                            <div class="snipcart-item block">
+                                <div class="snipcart-thumb">
+                                    <a href="/Product/Detay?i=@item.Id">
+                                        <img src="@item.ImageUrl" alt="@item.ImageUrl" style="width: 150px; height: 100px;" class="img-responsive"/>
+                                    </a>
+                                    
+                                    @*<a href="/Product/Detay?i=@item.Id"><img style="width: 250px; height: 200px;" src="~/img/kirtasiye/defter1.jpg" alt="" class="img-responsive" asp-append-version="true" /></a>*@
+
+                                    <a href="/Product/Detay?i=@item.Id"> @item.Name</a>
+                                    <a href="/Product/Detay?i=@item.Id"> @*@item.KategoriName*@</a>
+                                    <p></p>
+                                    @*<script> var price = @item.Price +2; @item.Price=price; </script>*@
+                                    <h4>@item.Price ₺ @*<span>(@item.Price)₺</span>*@</h4> <h6>Miktar:@item.Quantity</h6>
+                                </div>
+                                <div class="snipcart-details top_brand_home_details">
+                                    @*<form action="/Product/Buy?i=@item.Id" method="post">*@
+                                    <form>
+                                        <fieldset>
+
+                                            @*Mini carta gelen yer burası
+                                            <input type="hidden" name="cmd" value="_cart" />
+                                            <input type="hidden" name="add" value="1" />
+                                            <input type="hidden" name="business" value=" " />
+                                            <input type="hidden" name="item_name" value="@item.Name" />
+                                            <input type="hidden" name="amount" value="@item.Price" />
+                                            <input type="hidden" name="amount" value="@item.groupId" />
+                                            <input type="hidden" name="amount" value="@item.groupName" />
+                                            <input type="hidden" name="discount_amount" value="1.00" />
+                                            <input type="hidden" name="currency_code" value="USD" />
+                                            <input type="hidden" name="return" value=" " />
+                                            <input type="hidden" name="cancel_return" value=" " />*@
+
+                                            <input type="button" class="button" value="Sepete Ekle" onclick="location.href = '@Url.Action("DetaySepetBuy", "Product", new {i = @item.Id})'"/>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

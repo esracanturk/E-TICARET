@@ -1,0 +1,191 @@
+﻿@using DenemeShop_MVC.Models
+@model ProductWithStore
+
+<html>
+<head>
+    <link href="~/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #84C639;
+            color: white;
+            padding: 8px 18px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            /*width: 15%;*/
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        .cancelbtn {
+            width: auto;
+            padding: 8px 18px;
+            background-color: red;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 4px;
+            width: auto
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+</html>
+<h1>Ürün Ekleme Sayfası</h1>
+@*<form method="post" enctype="multipart/form-data" asp-action="ProductEkle" asp-controller="Product">*@
+<form asp-controller="Product" asp-action="ProductEkle" method="post" enctype="multipart/form-data">
+    <div>
+        @*<label for="Id">Ürün ID:</label>
+        <input type="text" id="Id" name="Id"><br><br>*@
+
+        <label for="Name">Ürünün Adı:</label>
+        <input type="text" id="Name" name="Name"><br><br>
+
+        <label for="Quantity">Ürünün Miktarı:</label>
+        <input type="text" id="Quantity" name="Quantity"><br><br>
+
+        <label for="Price">Ürünün Fiyatı:</label>
+        <input type="text" id="Price" name="Price"><br><br>
+
+        <label for="Description">Ürünün Açıklaması:</label>
+        <input type="text" id="Description" name="Description"><br><br>
+
+        <label for="GroupId">Ürün Mağaza Bilgisi:</label>
+        <select name="groupId" id="groupId">
+            @foreach (var item in ViewBag.deger1)
+            {
+                <option value="@item.groupId">@item.groupName</option>
+            }
+        </select>
+        <br />
+        <br />
+
+
+        <label for="KategoriId">Ürün Kategori Bilgisi:</label>
+        <select name="KategoriID" id="KategoriID">
+            @foreach (var item in ViewBag.deger2)
+            {
+                <option value="@item.KategoriID">@item.KategoriName</option>
+            }
+        </select>
+        <br />
+        <br />
+
+        <label>Ürün Fotoğrafı:</label>
+        <div class="custom-file">
+            <input class="form-control custom-file-input" type="file" name="file" />
+            <label class="custom-file-label">Seçiniz</label>
+        </div>
+        @*<button type="submit">Yükle</button>*@
+
+        @*<img src="@ViewData["FileLocation"]" width="200" height="200" />*@
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".custom-file-input").on("change",
+                    function () {
+                        var fileName = $(this).split("\\").pop();
+                        $(this).next(".custom-file-label").html(fileName);
+                    });
+            });
+        </script>
+        <br />
+        <br />
+
+
+        @*<label for="Image">Ürünün Fotoğrafı:</label>
+        <input type="image" id="ImageUrl" name="ImageUrl"><br><br>*@
+        @*<form id="files" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" />
+        </form>*@
+        @*<button type="submit">Upload Image</button>*@
+        @*<label>Upload File=@ViewData["FilePath"]</label><br /><br />*@
+
+        @*<div class="form-group">
+            <label asp-for="CoverPhoto" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="CoverPhoto" class="custom-file-input" id="customFile" name="ImageUrl">
+                <label class="custom-file-label" for="customFile">Resim Seçiniz</label>
+            </div>
+        </div>*@
+
+        <!--<a--> @*href="/Product/AdminAnasayfa"*@ <!--class="btn btn-info" id="buttonn12" style="background-color: #84C639">Ürün Ekle</a>-->
+        <button class="button" id="buttonn1" @*style="background-color: #84C639"*@>Ürün Ekle</button>
+        @*<a href="/Product/AdminAnasayfa" class="btn btn-danger">Geri</a>*@
+        <button class="cancelbtn" id="buttonn12" @*style="background-color: #84C639"*@>Geri</button>
+    </div>
+</form>
+@*</form>*@
+<!--<script>
+ /*   $(document).ready(function () {*/
+        //$("#dropdown").select2();-->
+@*var Id = @Model.Id;*@
+<!--$("#buttonn1").click(function () {
+            debugger;
+          /*  var Id = $('#Id').val();*/
+            var Name = $('#Name').val();
+            var Quantity = $('#Quantity').val();
+            var Price = $('#Price').val();
+            var ImageUrl = $('#file').val();
+            var Description = $('#Description').val();
+            var dropvalue = $('#dropdown1 :selected').val();
+            var dropvalue2 = $('#dropdown2 :selected').val();
+            //var CoverPhoto = $('#customFile').val();
+            $.ajax({
+                type: 'POST',
+                url: '/Product/ProductEkle',
+                data: {
+                    /*id: Id,*/
+                    Name: Name,
+                    Quantity: Quantity,
+                    Price: Price,
+                    ImageUrl: ImageUrl,
+                    Description: Description,
+                    groupId: dropvalue,
+                    kategoriID:dropvalue2
+                },
+                success: function (data) {
+                    debugger;
+                    console.log('olduuuu');
+                    window.location.href = '@Url.Action("AdminAnasayfa","Product")';
+                },
+                error: function (data) {
+                    debugger
+                    console.log('')
+                }
+            });
+        });
+/*    });*/
+</script>-->

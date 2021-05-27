@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNetCore.Http
+@model List<DenemeShop_MVC.Models.ProductWithStore>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+
+    <style>
+        .content {
+            display: none;
+        }
+
+        .button {
+            background-color: orangered;
+            color: white;
+            padding: 15px 25px;
+            position: relative;
+            left: 975px;
+            top: initial;
+            margin: 20px 0;
+            border: none;
+            cursor: pointer;
+            /*width: 15%;*/
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-top: auto" class="agile_top_brands_grids">
+        <div class="logo_products ">
+            <div class="container">
+                <div class="w3ls_logo_products_left">
+                    <h2>Hoşgeldiniz, @Context.Session.GetString("username")</h2>
+                    <br />
+                    <br />
+                    <h1><a href="/home/Index"><span>Ajans</span> Store</a></h1>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <a href="/Product/Ekle" class="button">Ürün Ekle</a>
+        </div>
+        <br />
+        <br />
+        <br />
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 top_brand_left" style="margin-bottom: 50px;">
+                <div class="hover14 column">
+                    <div class="agile_top_brand_left_grid">
+                        <div class="agile_top_brand_left_grid_pos">
+                                <img src="/web/images/offer.png" alt=" " class="img-responsive" />
+                            </div>
+                        <div class="agile_top_brand_left_grid1">
+
+                            <figure>
+
+                                <div style=" " class="snipcart-item block">
+                                    <div class="snipcart-thumb">
+                                        <a href="/Product/Detay?i=@item.Id"><img style="width: 150px; height: 100px;" src="@item.ImageUrl" alt="@item.ImageUrl" class="img-responsive" /></a>
+                                        <a style="font-size: 30px;" href="/Product/Detay?i=@item.Id"> @item.Name</a>
+                                        <a href="/Product/Detay?i=@item.Id"> @item.groupName</a>
+                                        <p></p>
+                                        @*<p>@item.Name</p>*@
+
+                                        @*<script> var price = @item.Price +2; @item.Price=price; </script>*@
+                                        <h4 style="text-align: center">@item.Price ₺ @*<span>(@item.Price)₺</span>*@</h4>
+                                        <h6 style="text-align: center">Miktar:@item.Quantity</h6>
+                                    </div>
+                                    <div class="snipcart-details top_brand_home_details">
+                                        @*<form action="/Product/Buy?i=@item.Id" method="post">*@
+                                        <form action="DetaySepetBuy?i=@item.Id" method="post">
+                                            <fieldset>
+                                                <tr>
+                                                    <td><a href="/Product/Detay?i=@item.Id" class="btn btn-default" style="background-color: orangered;color: white">Ürün Detayları</a><br /><br /></td>
+                                                    <td><a href="/Product/Update?i=@item.Id" class="btn btn-success" style="background-color: #84C639">Ürünü Güncelle</a></td>
+                                                    <br />
+                                                    <br />
+                                                    <td><a href="/Product/Sil?i=@item.Id" class="btn btn-danger" style="background-color:red">Ürünü Sil</a></td>
+                                                </tr>
+                                                <br />
+                                                <br />
+                                                <br /><br /> <br /><br />
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+

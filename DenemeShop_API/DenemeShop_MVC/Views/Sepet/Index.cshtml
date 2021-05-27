@@ -1,0 +1,385 @@
+﻿@using DenemeShop_MVC.Controllers
+@model List<DenemeShop_MVC.Models.SepetModel>
+@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <style>
+
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 4px;
+            width: auto
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+        .txt {
+            line-height: 18px;
+            /*padding: 0 4px 10px 4px;*/
+            width: 50px !important;
+            height: 32px;
+            font-size: 14px;
+            text-align: center;
+            border: solid 1px #ccc;
+            margin-left: -10px;
+        }
+
+        .arttir {
+            display: block;
+            cursor: pointer;
+            background-color: orangered;
+            position: fixed;
+            left: 973px;
+            /*top: initial;*/
+            margin-right: auto;
+        }
+
+        .azalt {
+            display: block;
+            cursor: pointer;
+            background-color: #84c639;
+            position: fixed;
+            left: 895px;
+            /*margin-left: auto;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="page-wrapper" style="display: block;">
+            <div class="container-fluid">
+                <div class="row" id="controldiv">
+                    <div class="col-md-9 col-lg-9">
+                        <div class="card">
+                            <div class="card-header " style="background-color: #84c639">
+                                <h5 class="m-b-0 text-white"><i class="fas fa-shopping-cart"></i> Sepetim - <span id="sepetim-total"></span> Ürün</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table product-overview">
+                                        <thead>
+                                            <tr>
+                                                <th>Fotoğraf</th>
+                                                <th>Adı</th>
+                                                <th>Fiyat</th>
+                                                <th>Adet</th>
+                                                @*<th style="text-align:center">Toplam Fiyatı</th>*@
+                                                <th style="text-align:center">İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr class="rem1">
+                                                    @*<td class="invert">@item.Id</td>*@
+                                                    <td class="invert-image"><a href="single.html"><img src="@item.SepetImgUrl" alt="@item.SepetImgUrl" style="width: 100px;" class="img-responsive"></a></td>
+                                                    <td class="invert">@item.SepetName</td>
+                                                    <td class="invert">@item.SepetPrice</td>
+                                                    <td class="invert">
+                                                        <div class="quantity">
+                                                            @Html.ActionLink("-", "Azalt", new { id = @item.Id }, new { @class = "btn btn-secondary btn-sm azalt" })
+                                                            @*<input type="text" id="QuantityText" name="Quantity"><br><br>*@
+                                                        </div>
+                                                        @Html.TextBoxFor(x => @item.SepetQuantity, new { @class = "txt" })
+                                                        <div class="quantity">
+                                                            @Html.ActionLink("+", "Arttir", new { id = @item.Id }, new { @class = "btn btn-secondary btn-sm arttir" })
+                                                            @*<input type="text" id="QuantityText" name="Quantity"><br><br>*@
+                                                        </div>
+                                                    </td>
+                                                    @*<td><h2><span id="sepettoplamfiyat">@ViewBag.toplam</span> TL</h2></td>*@
+                                                    <td class="invert">
+                                                        <div class="rem">
+                                                            @*<div class="close1"> </div>*@
+                                                            <a href="/Sepet/DeleteSepet?SepetId=@item.Id" class="btn btn-danger">Sil</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @*<div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Sepet Özeti</h5>
+                                                            <hr>
+                                                            <small>Toplam Fiyatttt</small>
+                                                            <h2><span id="sepettoplamfiyat">@ViewBag.toplam</span> TL</h2>
+                                                            <a href="/Sepet/HepsiniAlUser?userId=@item.userId" class="btn btn-info" style="background-color: #84C639"> Siparişi Tamamla</a>
+                                                            <hr>
+                                                        </div>
+                                                    </div>*@
+                                                @*<a href="/Sepet/HepsiniAlUser?userId=@item.userId" class="btn btn-info"style="background-color: #84C639"> UserID gönder</a>*@
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @*</tbody>*@
+                                    @*<tbody id="product_list"><tr> <td><img src="../z_iibs/dokuman.htm?fileid=ABIFNE5DGYPOVGNFZ4GQZZCYDY&amp;onInputProcessing(display)" width="80"></td>  <td><h5 class="font-500">Kutulu Kalem</h5></td>   <td>20.00 TL</td>  <td>    <select class="form-control select-piece" style="width:80px" data-product="0008" data-price="20.00" id="order-select-0"><option value="1" selected="">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option>      </select>  </td>  <td><span id="order-totalPrice-0">20.00</span> TL</td>  <td align="center"><a style="cursor:pointer" class="order-delete" href="#" data-order="8" data-toggle="tooltip" data-original-title="" title=""><i class="ti-trash text-dark"></i> Sil</a></td></tr></tbody>*@
+                                    @*</table>*@
+                                    @*<hr>
+                                    <section class="content">
+                                        @using (Html.BeginForm("HepsiniAl", "Sepet", FormMethod.Get, new { enctype = "multipart/form-data" }))
+                                        {
+                                            <br />
+                                            <button class="btn btn-success btn-block" id="order_complete">Siparişi Tamamla</button>
+                                            <a href="/Home/Index" class="btn btn-info" style="background-color: #84C639">Siparişi Tamamla</a>
+                                        }
+                                        <h3 style="float: left">Toplam Fiyat: @ViewBag.toplam</h3>
+                                    </section>*@
+                                    <div class="d-flex no-block align-items-center">
+                                        <a class="btn-block" href="urunler.htm">
+                                            @*<button class="btn btn-info btn-outline btn-block"><i class="fas fa-arrow-left"></i> Ürünlere Geri Dön </button>*@
+                                            <a href="/Home/Index" class="btn btn-info" style=" background-color:orangered"><i class="fas fa-arrow-circle-left"></i> Ürünlere Geri Dön</a>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*@foreach (var item in Model)
+                        {*@
+                    <div class="col-md-3 col-lg-3" style="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Sepet Özeti</h5>
+                                <hr>
+                                <small>Toplam Fiyat</small>
+                                <h2><span id="sepettoplamfiyat">@ViewBag.toplam</span> TL</h2>
+                                @*<a href="/Sepet/HepsiniAl" class="btn btn-info" style="background-color: #84C639">Siparişi Tamamla</a>*@
+
+
+                                @if (@ViewBag.emailconfirm == false)
+                                {
+                                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;background-color: #84C639;color: white"><i class="fas fa-check"></i> E-Mail Aktiflik Kontrolü</button>
+                                    <div id="id01" class="modal">
+                                        <form class="modal-content animate" action="/action_page.php" method="post">
+                                            <div class="container">
+                                                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                                <label for="email"><b>Doğrulanmamış E-Mail</b></label>
+                                                @*<input type="text" placeholder="Enter E-Mail" name="email" id="email" required>*@
+
+                                            </div>
+
+                                            <div class="container" style="background-color:#f1f1f1">
+                                                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" id="gonder"><i class="fas fa-envelope"></i>Aktivasyon Mail'i Gönder</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                }
+                                @if (@ViewBag.emailconfirm == true)
+                                {
+                                    <a href="/Sepet/HepsiniAlUser?userId=@Context.Session.GetInt32("Id")" class="btn btn-info" style="background-color: #84C639"><i class="fas fa-thumbs-up"></i> Siparişi Tamamla</a>
+                                }
+
+                                @*@if (@ViewBag.emailconfirm == true)
+        {*@
+                                <hr>
+                                @*}*@
+                            </div>
+                        </div>
+                    </div>
+                    @*}*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        // Get the modal
+
+        var modal = document.getElementById('id01');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        $("#gonder").click(function () {
+            var email = $('#email').val();
+            $.ajax({
+                type: 'POST',
+                url: '/Account/EmailConfirm',
+                data: {
+                    email: email
+                },
+            });
+        });
+    </script>
+    <!--<script>
+        $(document).ready(function() {
+            debugger;
+            $("#Bas").click(function() {-->
+    @*@item.SepetQuantity = @item.SepetQuantity + 1;*@
+    <!--$.ajax({
+                type: 'GET',
+                url: '/Sepet/HepsiniAl',
+                data: { userId: @Model },
+
+                success: function (data) {
+
+                    console.log('olduuuu');
+                    window.location.href = '@Url.Action("Index","Sepet")' ;
+                },
+                error: function (data) {
+                }
+            });
+
+        });
+    });
+    </script>-->
+</body>
